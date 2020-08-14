@@ -3,29 +3,29 @@ package com.chrisp.myfavneighbour.models
 import com.google.gson.annotations.SerializedName
 
 data class Character (
-    @SerializedName("")
+    @SerializedName("id")
     val id: Int,
-    @SerializedName("")
+    @SerializedName("name")
     val name: String,
-    @SerializedName("")
-    val status: Status,
-    @SerializedName("")
+    @SerializedName("status")
+    val status: String,
+    @SerializedName("species")
     val species: String,
-    @SerializedName("")
+    @SerializedName("type")
     val type: String,
-    @SerializedName("")
-    val gender: Gender,
-    @SerializedName("")
+    @SerializedName("gender")
+    val gender: String,
+    @SerializedName("origin")
     val origin: Location,
-    @SerializedName("")
+    @SerializedName("location")
     val location: Location,
-    @SerializedName("")
+    @SerializedName("image")
     val image: String,
-    @SerializedName("")
+    @SerializedName("episode")
     val episode: List<String>,
-    @SerializedName("")
+    @SerializedName("url")
     val url: String,
-    @SerializedName("")
+    @SerializedName("created")
     val created: String
 ){
     override fun toString(): String {

@@ -1,61 +1,65 @@
 package com.chrisp.myfavneighbour.ui.charactersList
 
+import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import androidx.recyclerview.widget.RecyclerView
+import com.chrisp.myfavneighbour.MainActivity
 import com.chrisp.myfavneighbour.R
+import com.chrisp.myfavneighbour.models.Character
 
-/**
- * A fragment representing a list of Items.
- */
-class CharactersListFragment : Fragment() {
-
-    private var columnCount = 1
+class CharactersListFragment : Fragment(),CharacterListContract.View {
+    lateinit internal var callback: FragmentListener
+    lateinit var mListener: CharacterListContract.Listener
+    lateinit var rvCharacters: RecyclerView
+    lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        arguments?.let {
-            columnCount = it.getInt(ARG_COLUMN_COUNT)
-        }
+        mListener = CharacterListPresenter(this)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_characters_list, container, false)
-
-        // Set the adapter
-        if (view is RecyclerView) {
-            with(view) {
-                layoutManager = when {
-                    columnCount <= 1 -> LinearLayoutManager(context)
-                    else -> GridLayoutManager(context, columnCount)
-                }
-                //adapter = MyItemRecyclerViewAdapter(DummyContent.ITEMS)
-            }
-        }
-        return view
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+       val v = inflater.inflate(R.layout.fragment_characters_list,container,false)
+        initValues(v)
+        return v
     }
 
-    companion object {
-
-        // TODO: Customize parameter argument names
-        const val ARG_COLUMN_COUNT = "column-count"
-
-        // TODO: Customize parameter initialization
-        @JvmStatic
-        fun newInstance(columnCount: Int) =
-            CharactersListFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(ARG_COLUMN_COUNT, columnCount)
-                }
-            }
+    override fun onStart() {
+        super.onStart()
+        mListener.getCharactersList()
     }
+
+    fun initValues(view: View){
+        rvCharacters = view.findViewById(R.id.list)
+        progressBar = view.findViewById(R.id.pbar_list)
+    }
+
+    override fun showLoading(show: Boolean) {
+        progressBar.visibility = if (show) View.VISIBLE else View.GONE
+        progressBar.isIndeterminate = show
+    }
+
+    override fun goProfile(id: Int) {
+        callback.goToCharacter(id)
+    }
+
+    override fun setCharactersList(characters: List<Character>) {
+       rvCharacters.adapter = CharactersListAdapter(characters,this)
+    }
+
+    fun setFragmentListener(callback: FragmentListener){
+        this.callback = callback
+    }
+
+    interface FragmentListener{
+        fun goToCharacter(id:Int)
+    }
+
 }
