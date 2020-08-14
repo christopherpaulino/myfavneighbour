@@ -3,7 +3,7 @@ package com.chrisp.myfavneighbour
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.chrisp.myfavneighbour.ui.charactersList.CharactersFragment
+import com.chrisp.myfavneighbour.ui.charactersList.CharactersListFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
-        showFragment(CharactersFragment())
+        showFragment(CharactersListFragment())
 
     }
 

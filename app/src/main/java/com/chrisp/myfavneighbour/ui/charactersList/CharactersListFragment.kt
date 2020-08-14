@@ -9,12 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.chrisp.myfavneighbour.R
-import com.chrisp.myfavneighbour.ui.charactersList.dummy.DummyContent
 
 /**
  * A fragment representing a list of Items.
  */
-class CharactersFragment : Fragment() {
+class CharactersListFragment : Fragment() {
 
     private var columnCount = 1
 
@@ -39,7 +38,7 @@ class CharactersFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyItemRecyclerViewAdapter(DummyContent.ITEMS)
+                //adapter = MyItemRecyclerViewAdapter(DummyContent.ITEMS)
             }
         }
         return view
@@ -53,7 +52,7 @@ class CharactersFragment : Fragment() {
         // TODO: Customize parameter initialization
         @JvmStatic
         fun newInstance(columnCount: Int) =
-            CharactersFragment().apply {
+            CharactersListFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_COLUMN_COUNT, columnCount)
                 }
