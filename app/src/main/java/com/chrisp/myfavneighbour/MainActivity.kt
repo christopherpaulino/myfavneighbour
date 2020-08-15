@@ -32,9 +32,10 @@ class MainActivity : AppCompatActivity(),CharactersListFragment.FragmentListener
     }
 
 
-    override fun goToCharacter(id: Int) {
+    override fun goToCharacter(id: Int,total:Int) {
         val intent = Intent()
         intent.putExtra("id",id)
+        intent.putExtra("total",total)
         intent.setClass(this,DetailCharacterActivity::class.java)
         startActivity(intent)
     }

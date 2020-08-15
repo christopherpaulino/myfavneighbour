@@ -8,16 +8,16 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CharacterListPresenter (val mView:CharacterListContract.View):CharacterListContract.Listener{
+class CharacterListPresenter (val mView:CharacterListContract.View,val mCtx: Context):CharacterListContract.Listener{
 
     override fun getCharactersList() {
         mView.showLoading(true)
-        ApiRest.create().getCharactersList().enqueue(object :Callback<CharacterListResponse>{
+        ApiRest.create(mCtx)?.getCharactersList()?.enqueue(object :Callback<CharacterListResponse>{
 
             override fun onResponse( call: Call<CharacterListResponse>,response: Response<CharacterListResponse>) {
                 if (response.isSuccessful){
                     mView.showLoading(false)
-                    mView.setCharactersList(response.body()!!.result)
+                    mView.setCharactersList(response.body()!!)
                 }
 
 

@@ -9,23 +9,30 @@ import androidx.fragment.app.Fragment
 import com.chrisp.myfavneighbour.R
 import com.chrisp.myfavneighbour.models.Character
 import com.chrisp.myfavneighbour.ui.charactersDetails.profile.ProfileFragment
+import kotlin.random.Random
 
 
 class DetailCharacterActivity : AppCompatActivity(),DetailCharacterContract.View {
 
     var idCharacter:Int = 0
+    var total:Int = 0
     lateinit var mListener:DetailCharacterContract.Listener
     lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_character)
-        mListener = DetailCharacterPresenter(this)
+        mListener = DetailCharacterPresenter(this,this)
         initValues()
         idCharacter = intent.getIntExtra("id",0)
-        mListener.getCharacter(idCharacter)
+        total = intent.getIntExtra("total",0)
+        getCharacters()
     }
 
+    fun getCharacters(){
+        val characters = "${idCharacter},${Random.nextInt(1,total)}"
+        mListener.getCharacter(characters)
+    }
     fun initValues(){
         progressBar = findViewById<ProgressBar>(R.id.pbar_profile)
     }
@@ -42,7 +49,13 @@ class DetailCharacterActivity : AppCompatActivity(),DetailCharacterContract.View
         progressBar.isIndeterminate = show
     }
 
-    override fun setCharacter(character: Character) {
-        showFragment(ProfileFragment.newInstance(character))
+    override fun setCharacter(character: List<Character>) {
+        val char = character[0]
+        val neigbourCharacter = character[1]
+        char.apply {
+            neighbour = neigbourCharacter.name
+            neighbour_image = neigbourCharacter.image
+        }
+        showFragment(ProfileFragment.newInstance(char))
     }
 }

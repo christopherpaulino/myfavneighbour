@@ -11,7 +11,7 @@ import com.chrisp.myfavneighbour.R
 import com.chrisp.myfavneighbour.models.Character
 
 
-class CharactersListAdapter(private val values: List<Character>, private val mView:CharacterListContract.View) : RecyclerView.Adapter<CharactersListAdapter.ViewHolder>() {
+class CharactersListAdapter(private val values: List<Character>,private val total:Int ,private val mView:CharacterListContract.View) : RecyclerView.Adapter<CharactersListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -25,7 +25,7 @@ class CharactersListAdapter(private val values: List<Character>, private val mVi
         holder.gender.text = item.gender
         holder.status.text = item.status
         holder.card.setOnClickListener{
-           mView.goProfile(item.id)
+           mView.goProfile(item.id,total)
         }
     }
 

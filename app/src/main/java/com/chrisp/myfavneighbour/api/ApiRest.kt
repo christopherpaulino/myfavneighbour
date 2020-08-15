@@ -1,6 +1,10 @@
 package com.chrisp.myfavneighbour.api
 
+import android.content.Context
+import android.content.DialogInterface
 import android.util.Log
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.AlertDialogLayout
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.ConnectionPool
@@ -17,8 +21,9 @@ import java.util.concurrent.TimeUnit
 object ApiRest {
     const val BASE_URL = "https://rickandmortyapi.com/api/"
 
-    fun create(): ApiServices {
+    fun create(context: Context): ApiServices? {
 
+        if (NetworkUtil().isOnline(context)){
         val gson = GsonBuilder()
             .setLenient()
             .create()
@@ -31,6 +36,7 @@ object ApiRest {
             .connectTimeout(5, TimeUnit.MINUTES)
             .readTimeout(5, TimeUnit.MINUTES)
             .writeTimeout(5, TimeUnit.MINUTES)
+            .addInterceptor(loggingInterceptor)
         val client = okBuilder.build()
 
            val retrofit = Retrofit.Builder()
@@ -42,6 +48,16 @@ object ApiRest {
 
 
         return retrofit.create(ApiServices::class.java)
+        }
+        else{
+            context.let {
+                AlertDialog.Builder(it)
+                    .setTitle("No Internet Connection")
+                    .setPositiveButton("Retry"){ dialogInterface: DialogInterface, i: Int -> create(context)}
+                    .create().show()
+            }
+            return null
+        }
 
     }
 

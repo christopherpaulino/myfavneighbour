@@ -6,10 +6,10 @@ class DetailCharacterContract {
 
     interface View{
         fun showLoading(show:Boolean)
-        fun setCharacter(character:Character)
+        fun setCharacter(character:List<Character>)
     }
 
     interface Listener{
-        fun getCharacter(id:Int)
+        fun getCharacter(query:String)
     }
 }

@@ -31,4 +31,10 @@
         <item name="android:textSize">@dimen/text_size_med</item>
     </style>
 
+    <style name="btn">
+        <item name="android:textColor">@color/icons</item>
+        <item name="android:background">@color/primary</item>
+        <item name="android:padding">8dp</item>
+    </style>
+
 </resources>

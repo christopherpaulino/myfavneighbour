@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chrisp.myfavneighbour.MainActivity
 import com.chrisp.myfavneighbour.R
 import com.chrisp.myfavneighbour.models.Character
+import com.chrisp.myfavneighbour.models.CharacterListResponse
 
 class CharactersListFragment : Fragment(),CharacterListContract.View {
     lateinit internal var callback: FragmentListener
@@ -22,7 +23,7 @@ class CharactersListFragment : Fragment(),CharacterListContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mListener = CharacterListPresenter(this)
+        mListener = CharacterListPresenter(this,requireContext())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -46,12 +47,12 @@ class CharactersListFragment : Fragment(),CharacterListContract.View {
         progressBar.isIndeterminate = show
     }
 
-    override fun goProfile(id: Int) {
-        callback.goToCharacter(id)
+    override fun goProfile(id: Int,total: Int) {
+        callback.goToCharacter(id,total)
     }
 
-    override fun setCharactersList(characters: List<Character>) {
-       rvCharacters.adapter = CharactersListAdapter(characters,this)
+    override fun setCharactersList(characters:CharacterListResponse) {
+       rvCharacters.adapter = CharactersListAdapter(characters.result,characters.info.count,this)
     }
 
     fun setFragmentListener(callback: FragmentListener){
@@ -59,7 +60,7 @@ class CharactersListFragment : Fragment(),CharacterListContract.View {
     }
 
     interface FragmentListener{
-        fun goToCharacter(id:Int)
+        fun goToCharacter(id:Int,total:Int)
     }
 
 }

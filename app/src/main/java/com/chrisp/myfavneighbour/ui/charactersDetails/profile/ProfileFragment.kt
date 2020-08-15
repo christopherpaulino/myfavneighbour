@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -34,12 +35,18 @@ class ProfileFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_profile, container, false)
         binding.character = character
-        loadPhoto()
+        loadPhoto(character.image,binding.ivProfile)
+        loadPhoto(character.neighbour_image,binding.ivNeighbour)
+
         return binding.root
     }
 
+    override fun onPause() {
+        super.onPause()
+        binding.character
+    }
 
-    private fun loadPhoto(){
+    private fun loadPhoto(url: String,view: ImageView){
         binding.loadingImg.visibility = View.VISIBLE
         Glide.with(requireContext())
             .load(character.image)
@@ -67,7 +74,7 @@ class ProfileFragment : Fragment() {
                     return false
                 }
             })
-            .into(binding.ivProfile);
+            .into(view);
     }
 
     companion object {

@@ -28,7 +28,9 @@ data class Character (
     @SerializedName("url")
     val url: String,
     @SerializedName("created")
-    val created: String
+    val created: String,
+    var neighbour:String = "",
+    var neighbour_image: String = ""
 ):Serializable{
     override fun toString(): String {
         return super.toString()

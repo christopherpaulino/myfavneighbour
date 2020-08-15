@@ -13,5 +13,5 @@ interface ApiServices {
     fun getCharactersList(@Query("page")page: Int = 1) : Call<CharacterListResponse>
 
     @GET("character/{id}")
-    fun getCharacterById(@Path("id")id: Int)  : Call<Character>
+    fun getCharacterById(@Path("id")id: String)  : Call<List<Character>>
 }

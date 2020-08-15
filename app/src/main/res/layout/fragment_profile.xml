@@ -28,14 +28,15 @@
         </ImageView>
 
         <ProgressBar
-            android:layout_width="wrap_content"
-            android:visibility="gone"
             android:id="@+id/loading_img"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/iv_profile"
             app:layout_constraintEnd_toEndOf="@+id/iv_profile"
             app:layout_constraintStart_toStartOf="@+id/iv_profile"
             app:layout_constraintTop_toTopOf="@+id/iv_profile" />
+
         <TextView
             android:id="@+id/profile_name"
             style="@style/name_card"
@@ -136,6 +137,52 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profile_name_location_lbl"
             tools:text="@string/location" />
+
+        <TextView
+            android:id="@+id/my_fav_lbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            style="@style/name_card"
+            android:text="@string/my_favorite_ne"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_name_location" />
+
+        <ImageView
+            android:id="@+id/iv_neighbour"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_neighbour_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_person"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/my_fav_lbl"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/tv_neighbour_name"
+            style="@style/name_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{character.neighbour}"
+            tools:text="@string/name"
+            app:layout_constraintBottom_toTopOf="@+id/find_btn"
+            app:layout_constraintEnd_toEndOf="@+id/iv_neighbour"
+            app:layout_constraintStart_toStartOf="@+id/iv_neighbour"
+            app:layout_constraintTop_toBottomOf="@+id/iv_neighbour" />
+
+        <Button
+            android:id="@+id/find_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="@string/find_neighbourd"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            style="@style/btn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
