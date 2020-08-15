@@ -1,6 +1,8 @@
 package com.chrisp.myfavneighbour.models
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
+
 
 data class Character (
     @SerializedName("id")
@@ -27,7 +29,7 @@ data class Character (
     val url: String,
     @SerializedName("created")
     val created: String
-){
+):Serializable{
     override fun toString(): String {
         return super.toString()
     }

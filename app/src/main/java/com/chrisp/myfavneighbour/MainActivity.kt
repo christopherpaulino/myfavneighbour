@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
-import com.chrisp.myfavneighbour.ui.charactersDetails.CharacterActivity
+import com.chrisp.myfavneighbour.ui.charactersDetails.DetailCharacterActivity
 import com.chrisp.myfavneighbour.ui.charactersList.CharactersListFragment
 
 class MainActivity : AppCompatActivity(),CharactersListFragment.FragmentListener {
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity(),CharactersListFragment.FragmentListener
     override fun goToCharacter(id: Int) {
         val intent = Intent()
         intent.putExtra("id",id)
-        intent.setClass(this,CharacterActivity::class.java)
+        intent.setClass(this,DetailCharacterActivity::class.java)
         startActivity(intent)
     }
 }

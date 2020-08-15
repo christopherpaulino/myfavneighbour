@@ -3,10 +3,13 @@
     <string name="name">Name</string>
     <string name="status">Status</string>
     <string name="gender">Gender</string>
+    <string name="location">Neighbourhood</string>
     <!-- TODO: Remove or change this placeholder text -->
 
     <string name="title_activity_character">MainActivity</string>
     <string name="title_profile">Profile</string>
     <string name="title_find">Find Neighbour</string>
     <string name="my_favorite_ne">My Favorite Neighbour Is</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
