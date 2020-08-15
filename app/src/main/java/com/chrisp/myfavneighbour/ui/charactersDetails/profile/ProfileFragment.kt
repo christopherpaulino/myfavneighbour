@@ -17,6 +17,8 @@ import com.bumptech.glide.request.target.Target
 import com.chrisp.myfavneighbour.R
 import com.chrisp.myfavneighbour.databinding.FragmentProfileBinding
 import com.chrisp.myfavneighbour.models.Character
+import com.chrisp.myfavneighbour.ui.charactersDetails.DetailCharacterActivity
+
 const val ARG_CHARACTER ="character"
 class ProfileFragment : Fragment() {
 
@@ -38,6 +40,10 @@ class ProfileFragment : Fragment() {
         loadPhoto(character.image,binding.ivProfile)
         loadPhoto(character.neighbour_image,binding.ivNeighbour)
 
+        binding.findBtn.setOnClickListener {
+            (activity as DetailCharacterActivity).getCharacters()
+        }
+
         return binding.root
     }
 
@@ -49,7 +55,7 @@ class ProfileFragment : Fragment() {
     private fun loadPhoto(url: String,view: ImageView){
         binding.loadingImg.visibility = View.VISIBLE
         Glide.with(requireContext())
-            .load(character.image)
+            .load(url)
             .placeholder(R.drawable.ic_person)
             .error(R.drawable.ic_person)
             .addListener(object :RequestListener<Drawable>{
