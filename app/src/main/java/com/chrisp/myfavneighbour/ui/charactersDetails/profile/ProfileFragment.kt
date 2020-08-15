@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -37,8 +38,8 @@ class ProfileFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_profile, container, false)
         binding.character = character
-        loadPhoto(character.image,binding.ivProfile)
-        loadPhoto(character.neighbour_image,binding.ivNeighbour)
+        loadPhoto(character.image,binding.ivProfile,binding.loadingImg)
+        loadPhoto(character.neighbour_image,binding.ivNeighbour,binding.loadingImgNeighbourd)
 
         binding.findBtn.setOnClickListener {
             (activity as DetailCharacterActivity).getCharacters()
@@ -52,8 +53,8 @@ class ProfileFragment : Fragment() {
         binding.character
     }
 
-    private fun loadPhoto(url: String,view: ImageView){
-        binding.loadingImg.visibility = View.VISIBLE
+    private fun loadPhoto(url: String,view: ImageView,loading: ProgressBar){
+        loading.visibility = View.VISIBLE
         Glide.with(requireContext())
             .load(url)
             .placeholder(R.drawable.ic_person)
@@ -65,7 +66,7 @@ class ProfileFragment : Fragment() {
                     target: Target<Drawable>?,
                     isFirstResource: Boolean
                 ): Boolean {
-                    binding.loadingImg.visibility = View.GONE
+                    loading.visibility = View.GONE
                     return false
                 }
 
@@ -76,7 +77,7 @@ class ProfileFragment : Fragment() {
                     dataSource: DataSource?,
                     isFirstResource: Boolean
                 ): Boolean {
-                    binding.loadingImg.visibility = View.GONE
+                    loading.visibility = View.GONE
                     return false
                 }
             })

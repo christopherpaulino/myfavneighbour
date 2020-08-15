@@ -183,6 +183,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             style="@style/btn" />
+        <ProgressBar
+            android:id="@+id/loading_img_neighbourd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_neighbour"
+            app:layout_constraintEnd_toEndOf="@+id/iv_neighbour"
+            app:layout_constraintStart_toStartOf="@+id/iv_neighbour"
+            app:layout_constraintTop_toTopOf="@+id/iv_neighbour" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
